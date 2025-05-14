@@ -1,0 +1,62 @@
+<iframe
+  src="https://api.leadconnectorhq.com/widget/form/30NOFE0DBjLnEPXo99kI"
+  style="width:100%;height:100%;border:none;border-radius:3px"
+  id="inline-30NOFE0DBjLnEPXo99kI" 
+  data-layout="{'id':'INLINE'}"
+  data-trigger-type="alwaysShow"
+  data-trigger-value=""
+  data-activation-type="alwaysActivated"
+  data-activation-value=""
+  data-deactivation-type="neverDeactivate"
+  data-deactivation-value=""
+  data-form-name="CASDO Offer Price Form"
+  data-height="690"
+  data-layout-iframe-id="inline-30NOFE0DBjLnEPXo99kI"
+  data-form-id="30NOFE0DBjLnEPXo99kI"
+  title="CASDO Offer Price Form"
+      >
+</iframe>
+<script src="https://link.msgsndr.com/js/form_embed.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Extract car info from the URL
+  // Example URL: https://www.dealfinderspr.com/inventario/casdo/2021-hyundai-santa-fe-yg28/
+  const urlPath = window.location.pathname;
+  const urlSegments = urlPath.split('/').filter(segment => segment.length > 0);
+  
+  // Get car details from URL (assuming URL format is consistent)
+  let year = '';
+  let make = '';
+  let model = '';
+  
+  // Parse the URL format
+  if (urlSegments.length >= 4 && urlSegments[1] === 'casdo') {
+    // Example: 2021-hyundai-santa-fe-yg28
+    const carSegment = urlSegments[3];
+    const carInfo = carSegment.split('-');
+    
+    if (carInfo.length >= 3) {
+      year = carInfo[0];
+      make = carInfo[1];
+      model = carInfo.slice(2, -1).join('-'); // Combine model parts and exclude the last part (code)
+    }
+  }
+  
+  // Find the iframe
+  const iframe = document.getElementById('inline-30NOFE0DBjLnEPXo99kI');
+  if (iframe) {
+    // Get the current src
+    let src = iframe.getAttribute('src');
+    
+    // Append parameters
+    const separator = src.includes('?') ? '&' : '?';
+    src += separator + `car_year=${encodeURIComponent(year)}&car_make=${encodeURIComponent(make)}&car_model=${encodeURIComponent(model)}`;
+    
+    // Update the iframe src
+    iframe.setAttribute('src', src);
+    
+    // Log for debugging
+    console.log(`Passing car details to form - Year: ${year}, Make: ${make}, Model: ${model}`);
+  }
+});
+</script>
